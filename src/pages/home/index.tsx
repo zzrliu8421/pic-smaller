@@ -60,7 +60,7 @@ const Header = observer(() => {
         {/* If non-PC is determined, the menu button will be displayed */}
         {!isPC && homeState.list.size > 0 && (
           <>
-            <Divider type="vertical" style={{ background: "#dfdfdf" }} />
+            <Divider type="vertical" style={{ background: "rgba(255, 255, 255, 0.12)" }} />
             <Button
               icon={<MenuOutlined />}
               onClick={() => {

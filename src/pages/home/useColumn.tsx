@@ -225,7 +225,7 @@ export function useColumn(disabled: boolean) {
                   ></path>
                   <path
                     d="M320 106.666667m5.333333 0l373.333334 0q5.333333 0 5.333333 5.333333l0 64q0 5.333333-5.333333 5.333333l-373.333334 0q-5.333333 0-5.333333-5.333333l0-64q0-5.333333 5.333333-5.333333Z"
-                    fill="#ff4d4f"
+                    fill="#f87171"
                   ></path>
                 </svg>
               </Tooltip>
@@ -245,7 +245,7 @@ export function useColumn(disabled: boolean) {
                 <svg viewBox="0 0 1024 1024" width="18" height="20">
                   <path
                     d="M736 448l-256 256-256-256 160 0 0-384 192 0 0 384zM480 704l-480 0 0 256 960 0 0-256-480 0zM896 832l-128 0 0-64 128 0 0 64z"
-                    fill="#707070"
+                    fill="#a1a1aa"
                   />
                 </svg>
               </Tooltip>
