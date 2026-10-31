@@ -1,17 +1,15 @@
-import { Button, Dropdown, Flex, Space, Tooltip, Typography } from "antd";
+import { Button, Flex, Space, Tooltip, Typography } from "antd";
 import style from "./LeftContent.module.scss";
 import { observer } from "mobx-react-lite";
 import {
   ArrowDownOutlined,
   ArrowUpOutlined,
-  ClearOutlined,
   DeleteOutlined,
   DownloadOutlined,
   EyeOutlined,
   FolderAddOutlined,
   PlusOutlined,
   ReloadOutlined,
-  SortAscendingOutlined,
 } from "@ant-design/icons";
 import { useRef, useState } from "react";
 import { ImageInput } from "@/components/ImageInput";
@@ -56,21 +54,16 @@ export const LeftContent = observer(() => {
     }
   })();
 
-  const sortMenu = {
-    items: [
-      { key: "default", label: gstate.locale?.sort?.default },
-      { key: "name", label: gstate.locale?.sort?.name },
-      { key: "size", label: gstate.locale?.sort?.size },
-      { key: "rate", label: gstate.locale?.sort?.rate },
-    ],
-    selectedKeys: [sortKey],
-    onClick({ key }: { key: string }) {
-      setSortKey(key as SortKey);
-    },
-  };
+  const sortTabs: Array<{ key: SortKey; label: string }> = [
+    { key: "default", label: gstate.locale?.sort?.default ?? "" },
+    { key: "name", label: gstate.locale?.sort?.name ?? "" },
+    { key: "size", label: gstate.locale?.sort?.size ?? "" },
+    { key: "rate", label: gstate.locale?.sort?.rate ?? "" },
+  ];
 
   return (
     <Flex align="stretch" vertical className={style.content}>
+      {/* 主操作条 */}
       <Flex align="center" justify="space-between" className={style.menu}>
         <Space size={8}>
           <Button
@@ -96,19 +89,11 @@ export const LeftContent = observer(() => {
               {!isMobile && gstate.locale?.listAction.addFolder}
             </Button>
           )}
-          {!isMobile && (
-            <Dropdown menu={sortMenu}>
-              <Button disabled={disabled} icon={<SortAscendingOutlined />}>
-                {gstate.locale?.sort?.placeholder}
-              </Button>
-            </Dropdown>
-          )}
         </Space>
         <Space size={8}>
           <Button
             disabled={disabled}
-            icon={<ClearOutlined />}
-            danger
+            icon={<ClearIcon />}
             onClick={() => {
               homeState.clear();
             }}
@@ -159,12 +144,35 @@ export const LeftContent = observer(() => {
         <ImageInput ref={fileRef} />
       </Flex>
 
+      {/* 排序条 */}
+      {!isMobile && (
+        <Flex align="center" justify="space-between" className={style.subbar}>
+          <Flex align="center" className={style.tabs}>
+            <span className={style.tabsLabel}>SORT</span>
+            {sortTabs.map((tab) => (
+              <button
+                key={tab.key}
+                className={classNames(style.tab, sortKey === tab.key && style.tabActive)}
+                onClick={() => setSortKey(tab.key)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </Flex>
+          <span className={style.count}>
+            {String(homeState.list.size).padStart(2, "0")} ITEMS
+          </span>
+        </Flex>
+      )}
+
+      {/* 规格单行 */}
       <div className={style.scrollBox}>
-        <div className={style.cards}>
-          {items.map((row) => (
-            <FilmCard
+        <div className={style.rows}>
+          {items.map((row, index) => (
+            <SpecRow
               key={row.key}
               row={row}
+              index={index + 1}
               disabled={disabled}
               isMobile={isMobile}
             />
@@ -179,12 +187,22 @@ export const LeftContent = observer(() => {
   );
 });
 
-function FilmCard({
+function ClearIcon() {
+  return (
+    <svg viewBox="0 0 1024 1024" width="14" height="14" fill="currentColor">
+      <path d="M912 239.2H112a5.333333 5.333333 0 0 0-5.333333 5.333333v64a5.333333 5.333333 0 0 0 5.333333 5.333334h88.32a5.333333 5.333333 0 0 1 5.333333 5.333333V912a5.333333 5.333333 0 0 0 5.333334 5.333333h601.973333a5.333333 5.333333 0 0 0 5.333333-5.333333V319.2a5.333333 5.333333 0 0 1 5.333334-5.333333H912a5.333333 5.333333 0 0 0 5.333333-5.333334v-64a5.333333 5.333333 0 0 0-5.333333-5.333333z m-470.24 486.506667a5.333333 5.333333 0 0 1-5.333333 5.333333h-64a5.333333 5.333333 0 0 1-5.333334-5.333333V430.826667a5.333333 5.333333 0 0 1 5.333334-5.333334h64a5.333333 5.333333 0 0 1 5.333333 5.333334z m215.146667 0a5.333333 5.333333 0 0 1-5.333334 5.333333h-64a5.333333 5.333333 0 0 1-5.333333-5.333333V430.826667a5.333333 5.333333 0 0 1 5.333334-5.333334h64a5.333333 5.333333 0 0 1 5.333333 5.333334z" />
+    </svg>
+  );
+}
+
+function SpecRow({
   row,
+  index,
   disabled,
   isMobile,
 }: {
   row: ImageItem;
+  index: number;
   disabled: boolean;
   isMobile: boolean;
 }) {
@@ -192,11 +210,13 @@ function FilmCard({
   const done = !compressing && !!row.compress;
 
   const lower = row.compress ? row.blob.size > row.compress.blob.size : false;
-  const rate =
+  // decrease > 0 表示变小
+  const decrease =
     row.compress && row.blob.size > 0
-      ? ((row.compress.blob.size - row.blob.size) / row.blob.size) * 100
+      ? ((row.blob.size - row.compress.blob.size) / row.blob.size) * 100
       : 0;
-  const rateText = Math.abs(rate).toFixed(1) + "%";
+  const rateText =
+    (decrease > 0 ? "−" : "+") + Math.abs(decrease).toFixed(1) + "%";
 
   const onCompare = () => {
     if (homeState.isCropMode()) return;
@@ -205,85 +225,72 @@ function FilmCard({
     }
   };
 
+  const canCompare = done && !homeState.isCropMode();
+
   return (
     <div
       className={classNames(
-        style.card,
+        style.row,
         compressing && style.compressing,
-        done && lower && style.better,
+        canCompare && style.done,
       )}
     >
-      {/* 胶片齿孔边 */}
-      <div className={style.sprockets} />
+      <span className={style.idx}>{String(index).padStart(2, "0")}</span>
 
-      {/* 缩略图：棋盘格底 + 显影扫描线 */}
+      {/* 缩略图 */}
       <div
-        className={classNames(style.thumb, "dk-checker")}
-        onClick={done && row.compress ? onCompare : undefined}
-        style={{ cursor: done && row.compress ? "zoom-in" : "default" }}
+        className={classNames(style.thumb, "ip-checker")}
+        onClick={canCompare ? onCompare : undefined}
+        style={{ cursor: canCompare ? "pointer" : "default" }}
       >
         {row.preview && <img src={row.preview.src} draggable={false} />}
         {compressing && <div className={style.scanline} />}
-        {done && !homeState.isCropMode() && (
-          <div className={style.compareHint}>
-            <EyeOutlined />
-          </div>
-        )}
       </div>
 
-      {/* 信息区 */}
-      <div className={style.info}>
+      {/* 名称 + 尺寸 */}
+      <div className={style.nameCol}>
         <Typography.Text className={style.name} title={row.name}>
           {row.name}
         </Typography.Text>
-        <div className={style.meta}>
-          <span className={style.metaItem}>
-            {row.width && row.height ? `${row.width}×${row.height}` : "-"}
-          </span>
-          {row.compress?.width && row.compress?.height && !isMobile && (
-            <>
-              <span className={style.metaArrow}>→</span>
-              <span className={style.metaItem}>
-                {row.compress.width}×{row.compress.height}
-              </span>
-            </>
-          )}
-          <span className={style.metaDivider} />
-          <span className={style.metaItem}>{formatSize(row.blob.size)}</span>
-          {row.compress && !isMobile && (
-            <>
-              <span className={style.metaArrow}>→</span>
-              <span
-                className={classNames(
-                  style.metaSize,
-                  lower ? style.good : style.bad,
-                )}
-              >
-                {formatSize(row.compress.blob.size)}
-              </span>
-            </>
-          )}
-        </div>
+        <span className={style.dims}>
+          {row.width && row.height ? `${row.width}×${row.height}` : "—"}
+          {row.compress?.width && row.compress?.height
+            ? ` → ${row.compress.width}×${row.compress.height}`
+            : ""}
+        </span>
       </div>
 
-      {/* 压缩率徽章 */}
-      {row.compress && (
-        <Tooltip title={lower ? undefined : gstate.locale?.optionPannel.failTip}>
-          <div
-            className={classNames(
-              style.badge,
-              lower ? style.badgeGood : style.badgeBad,
-            )}
-          >
-            {lower ? <ArrowDownOutlined /> : <ArrowUpOutlined />}
-            <span>{rateText}</span>
-          </div>
-        </Tooltip>
-      )}
+      {/* 引导线 */}
+      <span className={style.leader} />
 
-      {/* 操作区 */}
-      <Space size={2} className={style.actions}>
-        {row.compress && !homeState.isCropMode() && (
+      {/* 大小：移动端仅显示压缩后大小 */}
+      <span className={style.sizeCol}>
+        {!isMobile && formatSize(row.blob.size)}
+        {row.compress && (
+          <>
+            {!isMobile && <span className={style.sizeArrow}> → </span>}
+            <b className={lower ? style.sizeGood : style.sizeBad}>
+              {formatSize(row.compress.blob.size)}
+            </b>
+          </>
+        )}
+      </span>
+
+      {/* 压缩率 */}
+      <span className={style.rateCol}>
+        {row.compress && (
+          <Tooltip title={lower ? undefined : gstate.locale?.optionPannel.failTip}>
+            <span className={classNames(style.rate, lower ? style.rateGood : style.rateBad)}>
+              {!isMobile && (lower ? <ArrowDownOutlined /> : <ArrowUpOutlined />)}
+              {rateText}
+            </span>
+          </Tooltip>
+        )}
+      </span>
+
+      {/* 操作 */}
+      <Space size={0} className={style.actions}>
+        {canCompare && (
           <Tooltip title={gstate.locale?.columnTitle.preview}>
             <Button
               size="small"
@@ -312,7 +319,6 @@ function FilmCard({
           <Button
             size="small"
             type="text"
-            className={style.removeBtn}
             icon={<DeleteOutlined />}
             disabled={disabled}
             onClick={() => {

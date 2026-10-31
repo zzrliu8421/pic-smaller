@@ -14,33 +14,36 @@
   > div:nth-child(2) {
     flex-grow: 0;
     flex-shrink: 0;
-    font-size: 16px;
+    font-size: 15px;
     width: 28px;
     text-align: center;
-    color: #6e6450;
+    color: var(--ip-ink-3);
+    font-family: var(--ip-mono);
   }
 }
 
-/* 分组标题：琥珀小方块标记，像暗房里的标签灯 */
+/* 分组标题：CSS 计数器自动编号 —— 01 / 02 / 03…规格单式 */
 .olabel {
+  counter-increment: ip-section;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: baseline;
+  gap: 10px;
   font-size: 12px;
-  font-weight: 600;
-  color: #c9bda6;
+  font-weight: 700;
+  color: var(--ip-ink);
   position: relative;
   margin-bottom: 14px;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
+  letter-spacing: 0.1em;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--ip-line);
 
   &::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    border-radius: 2px;
-    background: #f5a524;
-    box-shadow: 0 0 6px rgba(245, 165, 36, 0.55);
-    flex-shrink: 0;
+    content: "0" counter(ip-section);
+    font-family: var(--ip-mono);
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--ip-accent);
+    letter-spacing: 0;
   }
 }

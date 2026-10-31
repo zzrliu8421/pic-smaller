@@ -26,31 +26,31 @@
   bottom: 0;
   z-index: 9;
   user-select: none;
-  background-color: #15110c;
+  background-color: #e9e6de;
   background-image: linear-gradient(
       45deg,
-      rgba(242, 234, 217, 0.045) 25%,
+      rgba(20, 20, 20, 0.05) 25%,
       transparent 25%,
       transparent 75%,
-      rgba(242, 234, 217, 0.045) 75%
+      rgba(20, 20, 20, 0.05) 75%
     ),
     linear-gradient(
       45deg,
-      rgba(242, 234, 217, 0.045) 25%,
+      rgba(20, 20, 20, 0.05) 25%,
       transparent 25%,
       transparent 75%,
-      rgba(242, 234, 217, 0.045) 75%
+      rgba(20, 20, 20, 0.05) 75%
     );
-  background-size: 20px 20px;
+  background-size: 18px 18px;
   background-position:
     0 0,
-    10px 10px;
+    9px 9px;
 
   &.show {
-    animation: BoxShow 0.3s ease-in forwards;
+    animation: BoxShow 0.25s ease-in forwards;
   }
   &.hide {
-    animation: BoxHide 0.3s ease-out forwards;
+    animation: BoxHide 0.25s ease-out forwards;
   }
   &.moving {
     cursor: grab;
@@ -76,38 +76,28 @@
     right: 0;
   }
 
-  /* 琥珀分割线 + 光圈手柄 */
+  /* 墨黑分割线 + 方形手柄 */
   > div:nth-child(3) {
     position: absolute;
     top: 0;
     bottom: 0;
     z-index: 3;
-    background: linear-gradient(
-      90deg,
-      rgba(245, 165, 36, 0.25),
-      #f5a524 40%,
-      #ffbe4d 60%,
-      rgba(245, 165, 36, 0.25)
-    );
-    box-shadow: 0 0 14px rgba(245, 165, 36, 0.5);
+    background-color: #141414;
     > div {
       position: absolute;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
+      width: 32px;
+      height: 32px;
       cursor: grab;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: rgba(21, 17, 12, 0.92);
-      border: 1.5px solid #f5a524;
-      box-shadow: 0 0 16px rgba(245, 165, 36, 0.55);
+      background-color: #141414;
+      color: #fff;
+      border-radius: 2px;
       svg {
         width: 20px;
         height: 20px;
-        stroke: #f5a524;
-        stroke-width: 1.8;
-        stroke-linecap: round;
+        display: block;
       }
     }
   }
@@ -115,32 +105,33 @@
 
 .action {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 14px;
+  right: 14px;
 }
 
-/* 胶片边缘标签：压缩前 / 压缩后 */
+/* A/B 标签：mono 小标签 */
 .frameTag {
   position: absolute;
-  bottom: 18px;
+  bottom: 16px;
   z-index: 4;
-  font-size: 12px;
+  font-family: var(--ip-mono);
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 2px;
-  color: #a89a83;
-  padding: 6px 14px;
-  background: rgba(21, 17, 12, 0.78);
-  border: 1px solid rgba(242, 234, 217, 0.14);
-  border-radius: 999px;
+  letter-spacing: 0.08em;
+  color: var(--ip-ink);
+  padding: 5px 12px;
+  background: #faf9f5;
+  border: 1px solid #141414;
+  border-radius: 2px;
   pointer-events: none;
 }
 .before {
-  left: 18px;
+  left: 16px;
 }
 .after {
-  right: 18px;
-  color: #ffbe4d;
-  border-color: rgba(245, 165, 36, 0.4);
+  right: 16px;
+  color: #ff4400;
+  border-color: #ff4400;
 }
 
 .help {

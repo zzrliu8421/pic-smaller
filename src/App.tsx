@@ -13,7 +13,7 @@ function useMobileVConsole() {
     if (!isMobile || !import.meta.env.DEV) return;
     let vConsole: any = null;
     import("vconsole").then((result) => {
-      vConsole = new result.default({ theme: "dark" });
+      vConsole = new result.default({ theme: "light" });
     });
     return () => vConsole?.destroy();
   }, [isMobile]);
@@ -26,83 +26,81 @@ export const App = observer(() => {
     <ConfigProvider
       locale={gstate.locale?.antLocale}
       theme={{
-        algorithm: theme.darkAlgorithm,
+        algorithm: theme.defaultAlgorithm,
         token: {
-          borderRadius: 10,
-          colorPrimary: "#f5a524",
-          colorLink: "#f5a524",
-          colorSuccess: "#f5a524",
-          colorWarning: "#ffbe4d",
-          colorError: "#ef6a5a",
-          colorInfo: "#f5a524",
-          colorBgBase: "#15110c",
-          colorBgContainer: "#1e1811",
-          colorBgElevated: "#2d2418",
-          colorBgLayout: "#15110c",
-          colorBorder: "rgba(242, 234, 217, 0.14)",
-          colorBorderSecondary: "rgba(242, 234, 217, 0.07)",
-          colorText: "#f2ead9",
-          colorTextSecondary: "#a89a83",
-          colorTextTertiary: "#6e6450",
-          colorSplit: "rgba(242, 234, 217, 0.09)",
+          borderRadius: 2,
+          colorPrimary: "#ff4400",
+          colorLink: "#141414",
+          colorSuccess: "#ff4400",
+          colorWarning: "#e08700",
+          colorError: "#0d5bd8",
+          colorInfo: "#141414",
+          colorBgBase: "#f2f0ea",
+          colorBgContainer: "#faf9f5",
+          colorBgElevated: "#ffffff",
+          colorBgLayout: "#f2f0ea",
+          colorBorder: "#c9c5ba",
+          colorBorderSecondary: "#dcd9d0",
+          colorText: "#141414",
+          colorTextSecondary: "#6b6b64",
+          colorTextTertiary: "#a3a099",
+          colorSplit: "#dcd9d0",
           fontSize: 14,
           fontFamily:
-            "'PingFang SC', 'HarmonyOS Sans SC', 'Segoe UI', 'Noto Sans SC', sans-serif",
+            "-apple-system, 'Helvetica Neue', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
         },
         components: {
           Layout: {
-            headerBg: "#1e1811",
-            bodyBg: "#15110c",
-            footerBg: "#1e1811",
+            headerBg: "#f2f0ea",
+            bodyBg: "#f2f0ea",
+            footerBg: "#f2f0ea",
           },
           Button: {
-            primaryShadow: "0 0 18px rgba(245, 165, 36, 0.25)",
-            defaultBorderColor: "rgba(242, 234, 217, 0.18)",
-            defaultBg: "#2d2418",
-            defaultHoverBg: "#3a2f1e",
+            primaryShadow: "none",
+            defaultShadow: "none",
+            defaultBorderColor: "#141414",
+            defaultBg: "#faf9f5",
+            defaultHoverBg: "#141414",
+            defaultHoverColor: "#ffffff",
+            defaultHoverBorderColor: "#141414",
+            fontWeight: 600,
           },
           Drawer: {
-            colorBgElevated: "#1e1811",
+            colorBgElevated: "#faf9f5",
           },
           Popover: {
-            colorBgElevated: "#2d2418",
+            colorBgElevated: "#ffffff",
           },
           Slider: {
-            trackBg: "#f5a524",
-            trackHoverBg: "#ffbe4d",
-            railBg: "rgba(242, 234, 217, 0.12)",
-            railHoverBg: "rgba(242, 234, 217, 0.18)",
-            handleColor: "#f5a524",
+            trackBg: "#ff4400",
+            trackHoverBg: "#e03a00",
+            railBg: "#dcd9d0",
+            railHoverBg: "#c9c5ba",
+            handleColor: "#141414",
+            handleActiveColor: "#ff4400",
           },
           Tooltip: {
-            colorBgSpotlight: "#2d2418",
+            colorBgSpotlight: "#141414",
           },
           Divider: {
-            colorSplit: "rgba(242, 234, 217, 0.09)",
+            colorSplit: "#dcd9d0",
           },
           Select: {
-            optionSelectedBg: "rgba(245, 165, 36, 0.14)",
+            optionSelectedBg: "#fff4ef",
           },
           Checkbox: {
-            colorPrimary: "#f5a524",
-            colorPrimaryHover: "#ffbe4d",
+            colorPrimary: "#ff4400",
+            colorPrimaryHover: "#e03a00",
           },
           ColorPicker: {
-            colorPrimary: "#f5a524",
-          },
-          Progress: {
-            defaultColor: "#f5a524",
+            colorPrimary: "#ff4400",
           },
           InputNumber: {
-            activeBorderColor: "#f5a524",
-            hoverBorderColor: "rgba(245, 165, 36, 0.5)",
+            activeBorderColor: "#141414",
+            hoverBorderColor: "#6b6b64",
           },
-          Table: {
-            headerBg: "#251e15",
-            headerColor: "#a89a83",
-            rowHoverBg: "rgba(245, 165, 36, 0.07)",
-            borderColor: "rgba(242, 234, 217, 0.07)",
-            headerSplitColor: "rgba(242, 234, 217, 0.07)",
+          Progress: {
+            defaultColor: "#ff4400",
           },
         },
       }}

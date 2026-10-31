@@ -1,44 +1,43 @@
-$headerHeight: 60px;
-$border: 1px solid rgba(242, 234, 217, 0.09);
-$footerHeight: 36px;
+$headerHeight: 56px;
+$line: 1px solid var(--ip-line-strong);
 
 .container {
   height: 100vh;
-  background-color: #15110c;
+  background-color: var(--ip-bg);
 }
 
 .header {
-  background-color: rgba(30, 24, 17, 0.85);
+  background-color: var(--ip-bg);
   height: $headerHeight;
   padding: 0 20px;
-  border-bottom: $border;
-  backdrop-filter: blur(6px);
-  z-index: 2;
+  border-bottom: $line;
 }
 
 .footer {
-  height: $footerHeight;
-  border-top: $border;
+  height: 34px;
+  border-top: 1px solid var(--ip-line);
   padding: 0 16px;
-  background-color: rgba(30, 24, 17, 0.6);
-  font-size: 12px;
+  background-color: var(--ip-bg);
+  font-size: 11px;
+  font-family: var(--ip-mono);
   a {
-    color: #6e6450;
+    color: var(--ip-ink-3);
     &:hover {
-      color: #f5a524;
+      color: var(--ip-ink);
     }
   }
 }
 
 .locale {
   cursor: pointer;
-  color: #a89a83;
-  padding: 6px 10px;
-  border-radius: 8px;
-  transition: all 0.25s ease;
+  color: var(--ip-ink-2);
+  padding: 6px 8px;
+  border-radius: 2px;
+  font-size: 13px;
+  transition: color 0.15s ease;
   svg {
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
     margin-right: 6px;
     path {
       fill: currentColor;
@@ -49,13 +48,14 @@ $footerHeight: 36px;
     color: currentColor;
   }
   &:hover {
-    color: #f5a524;
-    background: rgba(245, 165, 36, 0.08);
+    color: var(--ip-accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 }
 
 .main {
-  height: calc(100% - $headerHeight - $footerHeight);
+  height: calc(100% - $headerHeight - 34px);
   position: relative;
   flex: 1;
   overflow: hidden;
@@ -63,13 +63,13 @@ $footerHeight: 36px;
 
 a.github {
   cursor: pointer;
-  color: #a89a83;
-  margin-left: 8px;
-  transition: all 0.25s ease;
+  color: var(--ip-ink);
+  margin-left: 6px;
+  transition: color 0.15s ease;
   &:hover {
-    color: #f5a524;
+    color: var(--ip-accent);
   }
   span {
-    font-size: 20px;
+    font-size: 19px;
   }
 }

@@ -1,7 +1,6 @@
 import {
   Checkbox,
   ColorPicker,
-  Divider,
   Flex,
   InputNumber,
   Select,
@@ -224,8 +223,6 @@ export const CompressOption = observer(() => {
         {input}
       </OptionItem>
 
-      <Divider />
-
       <div className={style.olabel}>
         {gstate.locale?.optionPannel.outputFormat}
       </div>
@@ -245,7 +242,6 @@ export const CompressOption = observer(() => {
       {/* Colorpicker option */}
       {colorPicker}
 
-      <Divider />
       <div className={style.olabel}>
         {gstate.locale?.optionPannel.jpegLable}
       </div>
@@ -264,7 +260,6 @@ export const CompressOption = observer(() => {
         />
       </OptionItem>
 
-      <Divider />
       <div className={style.olabel}>{gstate.locale?.optionPannel.pngLable}</div>
 
       <OptionItem desc={gstate.locale?.optionPannel.colorsDesc}>
@@ -295,7 +290,6 @@ export const CompressOption = observer(() => {
         />
       </OptionItem>
 
-      <Divider />
       <div className={style.olabel}>{gstate.locale?.optionPannel.gifLable}</div>
 
       <OptionItem>
@@ -326,7 +320,6 @@ export const CompressOption = observer(() => {
 
       {Mimes.avif && (
         <>
-          <Divider />
           <div className={style.olabel}>
             {gstate.locale?.optionPannel.avifLable}
           </div>

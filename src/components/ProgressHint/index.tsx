@@ -1,66 +1,50 @@
 import { observer } from "mobx-react-lite";
 import style from "./index.module.scss";
-import { Flex, Typography } from "antd";
+import { Flex } from "antd";
 import { gstate } from "@/global";
-import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import { homeState } from "@/states/home";
 import { formatSize } from "@/functions";
 import { useResponse } from "@/media";
 
+/** 机械计数器风格的状态栏 */
 export const ProgressHint = observer(() => {
   const info = homeState.getProgressHintInfo();
   const { isMobile } = useResponse();
 
-  let rate: React.ReactNode = null;
-  if (info.originSize > info.outputSize) {
-    rate = (
-      <Typography.Text className={style.rateGood} strong>
-        {info.rate}%
-        <ArrowDownOutlined />
-      </Typography.Text>
-    );
-  } else {
-    rate = (
-      <Typography.Text className={style.rateBad} strong>
-        {info.rate}%
-        <ArrowUpOutlined />
-      </Typography.Text>
-    );
-  }
+  const good = info.originSize > info.outputSize;
 
   return (
-    <Flex vertical className={style.container}>
+    <Flex vertical className={style.container} gap={7}>
       <Flex align="center" className={style.stats}>
-        {/* 显影进度计数器 */}
+        {/* 计数器 */}
         <span className={style.counter}>
-          <Typography.Text strong className={style.loaded}>
-            {info.loadedNum}
-          </Typography.Text>
-          <Typography.Text type="secondary">
-            &nbsp;/&nbsp;{info.totalNum}
-          </Typography.Text>
+          <b>{String(info.loadedNum).padStart(2, "0")}</b>/
+          {String(info.totalNum).padStart(2, "0")}
         </span>
-        <span className={style.dot} />
+        <span className={style.sep} />
         {!isMobile && (
           <>
             <span className={style.item}>
               <label>{gstate.locale?.progress.before}</label>
-              <Typography.Text>{formatSize(info.originSize)}</Typography.Text>
+              <span>{formatSize(info.originSize)}</span>
             </span>
-            <span className={style.dot} />
+            <span className={style.sep} />
             <span className={style.item}>
               <label>{gstate.locale?.progress.after}</label>
-              <Typography.Text>{formatSize(info.outputSize)}</Typography.Text>
+              <span>{formatSize(info.outputSize)}</span>
             </span>
-            <span className={style.dot} />
+            <span className={style.sep} />
           </>
         )}
         <span className={style.item}>
           <label>{gstate.locale?.progress.rate}</label>
-          {rate}
+          <span className={good ? style.good : style.bad}>
+            {good ? "−" : "+"}
+            {info.rate}%
+          </span>
         </span>
       </Flex>
-      {/* 显影条：琥珀渐变进度 */}
+      {/* 仪器进度线 */}
       <div className={style.track}>
         <div
           className={style.fill}

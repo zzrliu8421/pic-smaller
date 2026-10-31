@@ -1,44 +1,32 @@
 .container {
   height: 100vh;
   width: 100vw;
-  background-color: #15110c;
+  background-color: var(--ip-bg);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
 }
 
-.aperture {
-  width: 84px;
-  height: 84px;
-  stroke: #f5a524;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  opacity: 0.55;
-  animation: Dk404Spin 14s linear infinite;
+/* 巨大 mono 数字 + 规则线 */
+.code {
+  font-family: var(--ip-mono);
+  font-size: 88px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ip-ink);
+  line-height: 1;
 }
 
-@keyframes Dk404Spin {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(1turn);
-  }
-}
-
-.title {
-  font-size: 64px;
-  font-weight: 800;
-  letter-spacing: 6px;
-  background: linear-gradient(120deg, #ffbe4d, #e08700);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.rule {
+  width: 120px;
+  height: 3px;
+  background: var(--ip-accent);
+  margin: 22px 0;
 }
 
 .desc {
-  color: #a89a83;
-  margin-bottom: 10px;
+  color: var(--ip-ink-2);
+  font-size: 13px;
+  margin-bottom: 26px;
 }

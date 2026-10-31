@@ -1,30 +1,36 @@
 .container {
-  width: 16px;
-  height: 16px;
-  stroke: #f5a524;
-  stroke-width: 2;
-  stroke-linecap: round;
-  animation: IndicatorSpin 0.9s linear infinite;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 12px;
+
+  > span {
+    width: 4px;
+    height: 12px;
+    background: var(--ip-accent);
+    animation: IpLevel 0.9s ease-in-out infinite;
+  }
 
   &.large {
-    width: 34px;
-    height: 34px;
-    stroke-width: 1.8;
+    height: 22px;
+    gap: 4px;
+    > span {
+      width: 6px;
+      height: 22px;
+    }
   }
-  &.white {
-    stroke: #fff;
+
+  &.white > span {
+    background: #fff;
   }
 }
 
-.blades {
-  transform-origin: 12px 12px;
-}
-
-@keyframes IndicatorSpin {
-  from {
-    transform: rotate(0);
+@keyframes IpLevel {
+  0%,
+  100% {
+    opacity: 0.15;
   }
-  to {
-    transform: rotate(1turn);
+  40% {
+    opacity: 1;
   }
 }

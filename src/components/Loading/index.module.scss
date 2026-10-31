@@ -8,8 +8,10 @@
   right: 0;
   z-index: 9999;
   > div {
-    width: 60px;
-    height: 60px;
-    background-color: rgba(0, 0, 0, 0.8);
+    width: 72px;
+    height: 48px;
+    background-color: #faf9f5;
+    border: 1px solid #141414;
+    border-radius: 2px;
   }
 }

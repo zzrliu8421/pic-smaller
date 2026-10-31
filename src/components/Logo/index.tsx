@@ -10,17 +10,21 @@ interface LogoProps {
 export const Logo = observer(({ title = "Pic Smaller" }: LogoProps) => {
   return (
     <div className={style.container}>
-      <svg className={style.mark} viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="9.2" />
-        <g className={style.blades}>
-          <line x1="14.31" y1="8" x2="20.05" y2="17.94" />
-          <line x1="9.69" y1="8" x2="21.17" y2="8" />
-          <line x1="7.38" y1="12" x2="13.12" y2="2.06" />
-          <line x1="9.69" y1="16" x2="3.95" y2="6.06" />
-          <line x1="14.31" y1="16" x2="2.83" y2="16" />
-          <line x1="16.62" y1="12" x2="10.88" y2="21.94" />
-        </g>
-      </svg>
+      {/* 仪器铭牌：黑方块 + 缺口圆环（镜头符号） */}
+      <span className={style.mark}>
+        <svg viewBox="0 0 20 20" fill="none">
+          <circle
+            cx="10"
+            cy="10"
+            r="5.5"
+            stroke="currentColor"
+            strokeWidth="2.4"
+            strokeDasharray="26 9"
+            strokeLinecap="butt"
+          />
+          <circle cx="10" cy="10" r="1.6" fill="currentColor" />
+        </svg>
+      </span>
       <Typography.Text className={style.title}>{title}</Typography.Text>
     </div>
   );

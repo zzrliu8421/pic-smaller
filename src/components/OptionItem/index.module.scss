@@ -1,11 +1,11 @@
 .container {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .desc {
   margin-bottom: 8px;
-  color: #a89a83;
-  font-size: 13px;
+  color: var(--ip-ink-2);
+  font-size: 12px;
 }
 
 :global(.ant-slider) {
