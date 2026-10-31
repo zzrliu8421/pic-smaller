@@ -3,140 +3,123 @@
   position: relative;
   cursor: pointer;
   user-select: none;
-  background-color: var(--ip-panel);
-  border: 1px solid var(--ip-line);
+  background-color: var(--pk-panel);
+  border: none;
+  border-right: 1px solid var(--pk-line);
   overflow: hidden;
   box-sizing: border-box;
   min-height: 340px;
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
+  transition: background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 
   &:hover {
-    border-color: var(--ip-ink);
+    background-color: #faf8f3;
+
+    .watermark {
+      color: var(--pk-seal);
+      opacity: 0.07;
+      transform: rotate(-4deg) scale(1.02);
+    }
   }
 
   &.active {
-    border-color: var(--ip-accent);
-    background-color: var(--ip-hover);
+    background-color: #f0ede6;
 
-    .rec {
-      background: var(--ip-accent);
-      animation: RecBlink 0.7s steps(2, jump-none) infinite;
+    .watermark {
+      color: var(--pk-seal);
+      opacity: 0.12;
+      transform: rotate(-6deg) scale(1.05);
     }
-    .reg {
-      color: var(--ip-accent);
+    .tick {
+      animation: TickBlink 0.9s ease-in-out infinite;
     }
   }
 }
 
-/* 四角印刷套准标记 */
-.reg {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  color: var(--ip-ink-3);
-  transition: color 0.2s ease;
-
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    background: currentColor;
-  }
-  /* 竖线 */
-  &::before {
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    margin-left: -0.5px;
-  }
-  /* 横线 */
-  &::after {
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    margin-top: -0.5px;
-  }
-}
-.regTL {
-  top: 14px;
-  left: 14px;
-}
-.regTR {
-  top: 14px;
-  right: 14px;
-}
-.regBL {
-  bottom: 14px;
-  left: 14px;
-}
-.regBR {
-  bottom: 14px;
-  right: 14px;
-}
-
-/* REC 指示灯 */
-.rec {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--ip-ink-3);
-  transition: background 0.2s ease;
-}
-
-@keyframes RecBlink {
-  0% {
+@keyframes TickBlink {
+  0%,
+  100% {
     opacity: 1;
   }
-  100% {
+  50% {
     opacity: 0.25;
   }
 }
 
-.inner {
+/* 巨大水印印章 */
+.watermark {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%) rotate(-4deg);
+  font-family: var(--pk-serif);
+  font-weight: 700;
+  font-size: clamp(160px, 24vw, 300px);
   line-height: 1;
-  padding: 36px 24px;
-  gap: 0;
+  color: var(--pk-ink);
+  opacity: 0.045;
+  pointer-events: none;
+  transition:
+    color 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+}
+
+/* 左对齐扉页文字块 */
+.inner {
   position: relative;
+  max-width: 560px;
+  padding: 40px 8%;
+  line-height: 1;
+}
+
+/* 标题前的朱砂笔触 */
+.tick {
+  display: block;
+  width: 34px;
+  height: 5px;
+  background: var(--pk-seal);
+  border-radius: 1px;
+  margin-bottom: 30px;
+  transition: opacity 0.3s ease;
 }
 
 .title {
-  margin-top: 26px;
-  font-size: 22px;
+  display: block;
+  font-family: var(--pk-serif);
+  font-size: clamp(24px, 3.2vw, 34px);
   font-weight: 700;
-  letter-spacing: 0.01em;
-  text-align: center;
-  padding: 0 16px;
-  color: var(--ip-ink);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  color: var(--pk-ink);
   white-space: pre-wrap;
 }
 
-.subTitle {
-  margin-top: 14px;
-  color: var(--ip-ink-2);
-  text-align: center;
-  padding: 0 16px;
-  line-height: 1.7;
-  max-width: 560px;
-  font-size: 13px;
-  font-family: var(--ip-mono);
-  letter-spacing: 0.02em;
+/* 墨线 */
+.rule {
+  width: 64px;
+  height: 1px;
+  background: var(--pk-ink-3);
+  margin: 26px 0 22px;
 }
 
-/* 粘贴提示：规格单脚注风格 */
+.subTitle {
+  color: var(--pk-ink-2);
+  line-height: 1.9;
+  font-size: 13px;
+  font-family: var(--pk-mono);
+  letter-spacing: 0.03em;
+}
+
+/* 粘贴提示：脚注式 */
 .pasteHint {
-  margin-top: 30px;
-  color: var(--ip-ink-2);
-  text-align: center;
+  margin-top: 34px;
+  color: var(--pk-ink-3);
   font-size: 12px;
-  font-family: var(--ip-mono);
-  line-height: 1.5;
-  padding: 9px 16px;
-  border: 1px solid var(--ip-line);
-  background: var(--ip-bg);
+  font-family: var(--pk-mono);
+  line-height: 1.6;
+  padding-left: 14px;
+  border-left: 1px solid var(--pk-line);
 }
 
 .mask {
@@ -145,4 +128,14 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+@media (max-width: 719px) {
+  .inner {
+    padding: 40px 24px;
+  }
+  .watermark {
+    right: -8%;
+    font-size: 200px;
+  }
 }

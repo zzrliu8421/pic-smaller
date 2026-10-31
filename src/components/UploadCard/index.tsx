@@ -87,18 +87,18 @@ export const UploadCard = observer(() => {
       align="center"
       className={classNames(style.container, state.dragActive && style.active)}
     >
-      {/* 四角印刷套准标记 */}
-      <span className={classNames(style.reg, style.regTL)} />
-      <span className={classNames(style.reg, style.regTR)} />
-      <span className={classNames(style.reg, style.regBL)} />
-      <span className={classNames(style.reg, style.regBR)} />
+      {/* 巨大水印印章（右侧压底） */}
+      <span className={style.watermark} aria-hidden>
+        缩
+      </span>
 
-      <Flex vertical align="center" className={style.inner}>
-        {/* REC 指示灯 */}
-        <span className={style.rec} />
+      {/* 不对称扉页：左对齐文字块 */}
+      <div className={style.inner}>
+        <span className={style.tick} />
         <Typography.Text className={style.title}>
           {gstate.locale?.uploadCard.title}
         </Typography.Text>
+        <div className={style.rule} />
         <div className={style.subTitle}>
           {sprintf(
             gstate.locale?.uploadCard.subTitle ?? "",
@@ -108,7 +108,8 @@ export const UploadCard = observer(() => {
         <div className={style.pasteHint}>
           {gstate.locale?.uploadCard.pasteHint}
         </div>
-      </Flex>
+      </div>
+
       <ImageInput ref={fileRef} />
       <div
         className={style.mask}

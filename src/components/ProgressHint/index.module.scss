@@ -3,19 +3,20 @@
 }
 
 .stats {
-  gap: 10px;
-  font-family: var(--ip-mono);
+  gap: 12px;
+  font-family: var(--pk-mono);
   font-size: 12px;
   flex-wrap: wrap;
 }
 
 .counter {
-  color: var(--ip-ink);
+  color: var(--pk-ink);
   white-space: nowrap;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 
   b {
     font-weight: 700;
+    color: var(--pk-seal);
   }
 }
 
@@ -24,45 +25,64 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--ip-ink);
+  color: var(--pk-ink);
 
   label {
-    color: var(--ip-ink-3);
+    color: var(--pk-ink-3);
     font-size: 11px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
   }
 }
 
 .sep {
   width: 1px;
   height: 12px;
-  background: var(--ip-line);
+  background: var(--pk-line);
   flex-shrink: 0;
 }
 
 .good {
-  color: var(--ip-accent);
+  color: var(--pk-seal);
   font-weight: 700;
 }
 .bad {
-  color: var(--ip-blue);
+  color: var(--pk-gray);
   font-weight: 700;
 }
 
-/* 仪器进度线：灰轨 + 橙填 */
+/* 墨线进度：淡墨轨道 + 朱砂填充 */
 .track {
   width: 100%;
-  height: 3px;
-  background: #e3e0d7;
+  height: 2px;
+  background: #e3e0d8;
   overflow: hidden;
+  position: relative;
 }
 
 .fill {
   height: 100%;
-  background: var(--ip-accent);
-  transition: width 0.25s ease;
+  background: var(--pk-seal);
+  transition: width 0.3s ease;
+  position: relative;
+
+  /* 末端朱砂点 */
+  &::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--pk-seal);
+  }
 
   &[data-done] {
-    background: var(--ip-ink);
+    background: var(--pk-ink);
+
+    &::after {
+      background: var(--pk-ink);
+    }
   }
 }

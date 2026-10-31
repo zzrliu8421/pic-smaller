@@ -1,40 +1,39 @@
-$headerHeight: 56px;
-$line: 1px solid var(--ip-line-strong);
+$headerHeight: 62px;
 
 .container {
   height: 100vh;
-  background-color: var(--ip-bg);
+  background-color: var(--pk-paper);
 }
 
 .header {
-  background-color: var(--ip-bg);
+  background-color: var(--pk-paper);
   height: $headerHeight;
-  padding: 0 20px;
-  border-bottom: $line;
+  padding: 0 22px;
+  border-bottom: 1px solid var(--pk-line);
 }
 
 .footer {
-  height: 34px;
-  border-top: 1px solid var(--ip-line);
+  height: 36px;
   padding: 0 16px;
-  background-color: var(--ip-bg);
+  background-color: var(--pk-paper);
   font-size: 11px;
-  font-family: var(--ip-mono);
+  font-family: var(--pk-mono);
+  letter-spacing: 0.04em;
   a {
-    color: var(--ip-ink-3);
+    color: var(--pk-ink-3);
     &:hover {
-      color: var(--ip-ink);
+      color: var(--pk-seal);
     }
   }
 }
 
 .locale {
   cursor: pointer;
-  color: var(--ip-ink-2);
-  padding: 6px 8px;
-  border-radius: 2px;
+  color: var(--pk-ink-2);
+  padding: 7px 10px;
+  border-radius: 3px;
   font-size: 13px;
-  transition: color 0.15s ease;
+  transition: color 0.3s ease;
   svg {
     width: 15px;
     height: 15px;
@@ -48,14 +47,12 @@ $line: 1px solid var(--ip-line-strong);
     color: currentColor;
   }
   &:hover {
-    color: var(--ip-accent);
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    color: var(--pk-seal);
   }
 }
 
 .main {
-  height: calc(100% - $headerHeight - 34px);
+  height: calc(100% - $headerHeight - 36px);
   position: relative;
   flex: 1;
   overflow: hidden;
@@ -63,13 +60,13 @@ $line: 1px solid var(--ip-line-strong);
 
 a.github {
   cursor: pointer;
-  color: var(--ip-ink);
-  margin-left: 6px;
-  transition: color 0.15s ease;
+  color: var(--pk-ink-2);
+  margin-left: 8px;
+  transition: color 0.3s ease;
   &:hover {
-    color: var(--ip-accent);
+    color: var(--pk-ink);
   }
   span {
-    font-size: 19px;
+    font-size: 18px;
   }
 }

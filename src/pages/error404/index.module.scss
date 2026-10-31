@@ -1,32 +1,44 @@
 .container {
   height: 100vh;
   width: 100vw;
-  background-color: var(--ip-bg);
+  background-color: var(--pk-paper);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-/* 巨大 mono 数字 + 规则线 */
-.code {
-  font-family: var(--ip-mono);
-  font-size: 88px;
+/* 倒置的水印印章 */
+.seal {
+  font-family: var(--pk-serif);
+  font-size: 120px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--ip-ink);
   line-height: 1;
+  color: var(--pk-seal);
+  opacity: 0.1;
+  transform: rotate(-8deg);
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.code {
+  font-family: var(--pk-serif);
+  font-size: 72px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--pk-ink);
+  line-height: 1.1;
 }
 
 .rule {
-  width: 120px;
-  height: 3px;
-  background: var(--ip-accent);
-  margin: 22px 0;
+  width: 56px;
+  height: 2px;
+  background: var(--pk-seal);
+  margin: 26px 0 20px;
 }
 
 .desc {
-  color: var(--ip-ink-2);
+  color: var(--pk-ink-2);
   font-size: 13px;
-  margin-bottom: 26px;
+  margin-bottom: 30px;
 }

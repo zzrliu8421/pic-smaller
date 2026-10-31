@@ -1,8 +1,8 @@
-$line-strong: 1px solid var(--ip-line-strong);
+$line: 1px solid var(--pk-line);
 
 .sidePc {
   width: 380px;
-  border-left: $line-strong;
+  border-left: $line;
   flex-shrink: 0;
 }
 
@@ -16,30 +16,30 @@ $line-strong: 1px solid var(--ip-line-strong);
 .side {
   height: 100%;
   overflow: hidden;
-  background-color: var(--ip-panel);
+  background-color: var(--pk-panel);
   display: flex;
   flex-direction: column;
   > div:nth-child(1) {
-    height: 56px;
-    border-bottom: $line-strong;
-    padding: 0 16px;
+    height: 58px;
+    border-bottom: $line;
+    padding: 0 18px;
     flex-shrink: 0;
   }
   > div:nth-child(2) {
-    padding: 20px 16px 32px;
+    padding: 22px 18px 36px;
     overflow-y: auto;
     flex: 1;
-    counter-reset: ip-section;
+    counter-reset: pk-section;
   }
 }
 
 .optionHelp {
   cursor: pointer;
   font-size: 0;
-  color: var(--ip-ink-3);
-  transition: color 0.15s ease;
+  color: var(--pk-ink-3);
+  transition: color 0.3s ease;
   &:hover {
-    color: var(--ip-ink);
+    color: var(--pk-seal);
   }
   > span {
     font-size: 0;

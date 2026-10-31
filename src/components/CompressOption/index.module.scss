@@ -17,33 +17,31 @@
     font-size: 15px;
     width: 28px;
     text-align: center;
-    color: var(--ip-ink-3);
-    font-family: var(--ip-mono);
+    color: var(--pk-ink-3);
+    font-family: var(--pk-mono);
   }
 }
 
-/* 分组标题：CSS 计数器自动编号 —— 01 / 02 / 03…规格单式 */
+/* 分组标题：mono 朱砂编号 + 底线，规格目录式 */
 .olabel {
-  counter-increment: ip-section;
+  counter-increment: pk-section;
   display: flex;
   align-items: baseline;
   gap: 10px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ip-ink);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pk-ink);
   position: relative;
-  margin-bottom: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding-bottom: 7px;
-  border-bottom: 1px solid var(--ip-line);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--pk-line);
 
   &::before {
-    content: "0" counter(ip-section);
-    font-family: var(--ip-mono);
+    content: "0" counter(pk-section);
+    font-family: var(--pk-mono);
     font-size: 11px;
     font-weight: 400;
-    color: var(--ip-accent);
-    letter-spacing: 0;
+    color: var(--pk-seal);
   }
 }

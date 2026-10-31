@@ -1,39 +1,40 @@
 @import "antd/dist/reset.css";
 
 /* ============================================================
-   Instrument Panel · 仪器面板主题
-   纸感浅灰 + 墨黑 + 信号橙。直角、规则线、等宽数据。
-   无渐变、无发光、无阴影 —— 像一台可靠的测量仪器。
+   纸墨主题 · Paper & Ink & Seal
+   宣纸米白 + 墨黑 + 一抹朱砂印章红。
+   衬线大标题、不对称扉页、大留白、缓慢呼吸的动效。
    ============================================================ */
 
 :root {
-  --ip-bg: #f2f0ea;
-  --ip-panel: #faf9f5;
-  --ip-ink: #141414;
-  --ip-ink-2: #6b6b64;
-  --ip-ink-3: #a3a099;
-  --ip-line: #dcd9d0;
-  --ip-line-strong: #141414;
-  --ip-accent: #ff4400;
-  --ip-accent-deep: #e03a00;
-  --ip-blue: #0d5bd8;
-  --ip-hover: #fff4ef;
-  --ip-sans: -apple-system, "Helvetica Neue", "Segoe UI", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --ip-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas,
+  --pk-paper: #f5f3ee;
+  --pk-panel: #fbfaf7;
+  --pk-ink: #1c1b18;
+  --pk-ink-2: #6f6c64;
+  --pk-ink-3: #a8a49a;
+  --pk-line: #e3e0d8;
+  --pk-seal: #bf3a2b;
+  --pk-seal-deep: #a53023;
+  --pk-gray: #8a867c;
+  --pk-hover: #f0ede6;
+  --pk-serif: Georgia, "Times New Roman", "Songti SC", "STSong", "SimSun",
+    "Noto Serif SC", serif;
+  --pk-sans: -apple-system, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Segoe UI", sans-serif;
+  --pk-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas,
     "JetBrains Mono", "Courier New", monospace;
 }
 
 html,
 body {
-  background-color: var(--ip-bg);
-  color: var(--ip-ink);
-  font-family: var(--ip-sans);
+  background-color: var(--pk-paper);
+  color: var(--pk-ink);
+  font-family: var(--pk-sans);
 }
 
 .__initial {
   height: 100vh;
-  background-color: var(--ip-bg);
+  background-color: var(--pk-paper);
   img {
     width: 30px;
   }
@@ -42,16 +43,16 @@ body {
   }
 }
 
-/* 亮色棋盘格（透明底纹样） */
-.ip-checker {
+/* 极淡棋盘格（透明底） */
+.pk-checker {
   background-image:
-    linear-gradient(45deg, rgba(20, 20, 20, 0.05) 25%, transparent 25%, transparent 75%, rgba(20, 20, 20, 0.05) 75%),
-    linear-gradient(45deg, rgba(20, 20, 20, 0.05) 25%, transparent 25%, transparent 75%, rgba(20, 20, 20, 0.05) 75%);
+    linear-gradient(45deg, rgba(28, 27, 24, 0.045) 25%, transparent 25%, transparent 75%, rgba(28, 27, 24, 0.045) 75%),
+    linear-gradient(45deg, rgba(28, 27, 24, 0.045) 25%, transparent 25%, transparent 75%, rgba(28, 27, 24, 0.045) 75%);
   background-size: 12px 12px;
   background-position: 0 0, 6px 6px;
 }
 
-/* 细仪器风滚动条 */
+/* 纸感滚动条 */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -60,19 +61,19 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c9c5ba;
-  border: 3px solid var(--ip-bg);
+  background: #d5d1c6;
+  border: 3px solid var(--pk-paper);
   border-radius: 5px;
   &:hover {
-    background: var(--ip-ink-3);
+    background: var(--pk-ink-3);
   }
 }
 * {
   scrollbar-width: thin;
-  scrollbar-color: #c9c5ba transparent;
+  scrollbar-color: #d5d1c6 transparent;
 }
 
 ::selection {
-  background: var(--ip-ink);
-  color: #fff;
+  background: var(--pk-seal);
+  color: #fbfaf7;
 }

@@ -5,69 +5,84 @@
 
 /* 主操作条 */
 .menu {
-  padding: 0 16px;
-  height: 56px;
-  border-bottom: 1px solid var(--ip-line-strong);
+  padding: 0 18px;
+  height: 58px;
+  border-bottom: 1px solid var(--pk-line);
+  background: var(--pk-panel);
   flex-shrink: 0;
 }
 
 /* 排序条 */
 .subbar {
-  height: 38px;
-  padding: 0 16px;
-  border-bottom: 1px solid var(--ip-line);
+  height: 40px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--pk-line);
+  background: var(--pk-panel);
   flex-shrink: 0;
 }
 
 .tabs {
-  gap: 2px;
+  gap: 4px;
 }
 
 .tabsLabel {
-  font-family: var(--ip-mono);
+  font-family: var(--pk-mono);
   font-size: 10px;
-  letter-spacing: 0.14em;
-  color: var(--ip-ink-3);
-  margin-right: 10px;
+  letter-spacing: 0.2em;
+  color: var(--pk-ink-3);
+  margin-right: 12px;
 }
 
 .tab {
   appearance: none;
   border: none;
   background: transparent;
-  padding: 4px 10px;
+  padding: 4px 2px;
+  margin-right: 14px;
   font-size: 12px;
-  color: var(--ip-ink-2);
+  color: var(--pk-ink-2);
   cursor: pointer;
-  border-radius: 2px;
-  line-height: 1.4;
-  transition:
-    color 0.15s ease,
-    background 0.15s ease;
+  line-height: 1.5;
+  position: relative;
+  transition: color 0.3s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    height: 1.5px;
+    background: var(--pk-seal);
+    transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
   &:hover {
-    color: var(--ip-ink);
+    color: var(--pk-ink);
   }
 
   &.tabActive {
-    color: #fff;
-    background: var(--ip-ink);
+    color: var(--pk-seal);
     font-weight: 600;
+
+    &::after {
+      right: 0;
+    }
   }
 }
 
 .count {
-  font-family: var(--ip-mono);
+  font-family: var(--pk-mono);
   font-size: 11px;
-  letter-spacing: 0.1em;
-  color: var(--ip-ink-3);
+  letter-spacing: 0.14em;
+  color: var(--pk-ink-3);
 }
 
 .scrollBox {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  background: var(--ip-panel);
+  background: var(--pk-panel);
 }
 
 .rows {
@@ -79,16 +94,30 @@
 .row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 9px 16px;
-  border-bottom: 1px solid var(--ip-line);
-  min-height: 62px;
-  transition: background 0.15s ease;
+  gap: 14px;
+  padding: 11px 18px 11px 16px;
+  border-bottom: 1px solid var(--pk-line);
+  min-height: 68px;
+  position: relative;
+  transition: background 0.35s ease;
+
+  /* 左缘朱砂线：hover 显现 */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 22%;
+    bottom: 22%;
+    width: 2px;
+    background: var(--pk-seal);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
 
   &:hover {
-    background: var(--ip-hover);
+    background: var(--pk-hover);
 
-    .compareHint {
+    &::before {
       opacity: 1;
     }
   }
@@ -96,19 +125,19 @@
 
 /* 序号 */
 .idx {
-  font-family: var(--ip-mono);
+  font-family: var(--pk-mono);
   font-size: 11px;
-  color: var(--ip-ink-3);
+  color: var(--pk-ink-3);
   width: 22px;
   flex-shrink: 0;
 }
 
 /* 缩略图 */
 .thumb {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   flex-shrink: 0;
-  border: 1px solid var(--ip-line);
+  border: 1px solid var(--pk-line);
   overflow: hidden;
   position: relative;
   background: #fff;
@@ -121,28 +150,27 @@
   }
 }
 
-/* 压缩中：显影扫描线 */
+/* 压缩中：墨韵晕染 */
 .scanline {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: -100%;
-  height: 60%;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(255, 68, 0, 0.18),
-    transparent
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 120%,
+    rgba(28, 27, 24, 0.16),
+    transparent 65%
   );
-  animation: IpScan 1.3s ease-in-out infinite;
+  animation: PkInk 2.2s ease-in-out infinite;
 }
 
-@keyframes IpScan {
-  0% {
-    top: -70%;
-  }
+@keyframes PkInk {
+  0%,
   100% {
-    top: 110%;
+    opacity: 0.2;
+    transform: translateY(30%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -150,7 +178,7 @@
 .nameCol {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   min-width: 0;
   flex: 0 1 auto;
 }
@@ -161,14 +189,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: var(--ip-ink);
+  color: var(--pk-ink);
   max-width: 100%;
 }
 
 .dims {
-  font-family: var(--ip-mono);
+  font-family: var(--pk-mono);
   font-size: 11px;
-  color: var(--ip-ink-2);
+  color: var(--pk-ink-3);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -178,43 +206,43 @@
 .leader {
   flex: 1;
   min-width: 16px;
-  border-bottom: 1px dotted #c2beb2;
+  border-bottom: 1px dotted #cfcabf;
   align-self: center;
   transform: translateY(4px);
 }
 
 /* 大小列 */
 .sizeCol {
-  font-family: var(--ip-mono);
+  font-family: var(--pk-mono);
   font-size: 12px;
-  color: var(--ip-ink-2);
+  color: var(--pk-ink-2);
   white-space: nowrap;
   flex-shrink: 0;
 
   .sizeArrow {
-    color: var(--ip-ink-3);
+    color: var(--pk-ink-3);
   }
 
   b {
     font-weight: 700;
     &.sizeGood {
-      color: var(--ip-accent);
+      color: var(--pk-seal);
     }
     &.sizeBad {
-      color: var(--ip-blue);
+      color: var(--pk-gray);
     }
   }
 }
 
 /* 压缩率列 */
 .rateCol {
-  width: 88px;
+  width: 92px;
   text-align: right;
   flex-shrink: 0;
 }
 
 .rate {
-  font-family: var(--ip-mono);
+  font-family: var(--pk-mono);
   font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
@@ -223,10 +251,10 @@
   gap: 4px;
 
   &.rateGood {
-    color: var(--ip-accent);
+    color: var(--pk-seal);
   }
   &.rateBad {
-    color: var(--ip-blue);
+    color: var(--pk-gray);
   }
 }
 
@@ -234,13 +262,13 @@
 .actions {
   flex-shrink: 0;
   :global(.ant-btn-text) {
-    color: var(--ip-ink-2);
+    color: var(--pk-ink-3);
     &:hover {
-      color: var(--ip-ink) !important;
-      background: rgba(20, 20, 20, 0.06) !important;
+      color: var(--pk-ink) !important;
+      background: rgba(28, 27, 24, 0.05) !important;
     }
     &:disabled {
-      color: #c9c5ba;
+      color: #d5d1c6;
     }
   }
 }
@@ -248,16 +276,16 @@
 /* 底部进度栏 */
 .footer {
   flex-shrink: 0;
-  padding: 11px 16px 13px;
-  border-top: 1px solid var(--ip-line-strong);
-  background: var(--ip-panel);
+  padding: 13px 18px 15px;
+  border-top: 1px solid var(--pk-line);
+  background: var(--pk-panel);
 }
 
 /* 窄屏适配 */
 @media (max-width: 719px) {
   .row {
     gap: 10px;
-    padding: 9px 10px;
+    padding: 9px 12px;
   }
   .idx,
   .leader,

@@ -1,36 +1,74 @@
 .container {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  height: 12px;
-
-  > span {
-    width: 4px;
-    height: 12px;
-    background: var(--ip-accent);
-    animation: IpLevel 0.9s ease-in-out infinite;
-  }
+  justify-content: center;
+  width: 14px;
+  height: 14px;
 
   &.large {
-    height: 22px;
-    gap: 4px;
-    > span {
-      width: 6px;
-      height: 22px;
-    }
+    width: 34px;
+    height: 34px;
   }
 
-  &.white > span {
-    background: #fff;
+  &.white {
+    .dot,
+    .ring {
+      background: #fbfaf7;
+      border-color: #fbfaf7;
+    }
   }
 }
 
-@keyframes IpLevel {
+/* 实心点：呼吸 */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pk-seal);
+  animation: PkBreath 1.6s ease-in-out infinite;
+}
+
+.large .dot {
+  width: 10px;
+  height: 10px;
+}
+
+/* 扩散环 */
+.ring {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--pk-seal);
+  background: transparent !important;
+  animation: PkRipple 1.6s ease-out infinite;
+}
+
+.large .ring {
+  width: 10px;
+  height: 10px;
+}
+
+@keyframes PkBreath {
   0%,
   100% {
-    opacity: 0.15;
+    transform: scale(0.85);
+    opacity: 0.75;
   }
-  40% {
+  50% {
+    transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes PkRipple {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
   }
 }
