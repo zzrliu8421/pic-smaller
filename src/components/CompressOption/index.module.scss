@@ -17,15 +17,30 @@
     font-size: 16px;
     width: 28px;
     text-align: center;
+    color: #6e6450;
   }
 }
 
+/* 分组标题：琥珀小方块标记，像暗房里的标签灯 */
 .olabel {
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
   font-weight: 600;
-  color: #d4d4d8;
+  color: #c9bda6;
   position: relative;
-  margin-bottom: 8px;
+  margin-bottom: 14px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.2px;
+
+  &::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: #f5a524;
+    box-shadow: 0 0 6px rgba(245, 165, 36, 0.55);
+    flex-shrink: 0;
+  }
 }

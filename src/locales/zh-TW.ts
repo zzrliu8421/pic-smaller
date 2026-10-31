@@ -22,6 +22,13 @@ const localeData: LocaleData = {
     removeOne: "移除圖片",
     reCompress: "重新壓縮",
   },
+  sort: {
+    placeholder: "排序方式",
+    default: "預設順序",
+    name: "按檔名",
+    size: "按原始大小",
+    rate: "按壓縮率",
+  },
   columnTitle: {
     status: "狀態",
     name: "檔案名稱",

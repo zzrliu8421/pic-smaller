@@ -1,13 +1,43 @@
 .container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   line-height: 1;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  span {
-    font-size: 22px;
-    color: #fafafa;
-    background: linear-gradient(135deg, #10b981, #34d399);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  user-select: none;
+}
+
+.mark {
+  width: 26px;
+  height: 26px;
+  stroke: #f5a524;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(245, 165, 36, 0.45));
+}
+
+.blades {
+  transform-origin: 12px 12px;
+  animation: LogoOpen 0.9s cubic-bezier(0.34, 1.4, 0.5, 1) both;
+}
+
+@keyframes LogoOpen {
+  from {
+    transform: rotate(-120deg) scale(0.55);
+    opacity: 0;
   }
+  to {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.title {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  font-size: 21px;
+  background: linear-gradient(120deg, #ffbe4d 10%, #f5a524 55%, #e08700 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

@@ -21,6 +21,13 @@ const localeData: LocaleData = {
     removeOne: "Eliminar imagen",
     reCompress: "Recomprimir",
   },
+  sort: {
+    placeholder: "Ordenar por",
+    default: "Orden original",
+    name: "Por nombre",
+    size: "Por tamaño",
+    rate: "Por ratio",
+  },
   columnTitle: {
     status: "Estado",
     name: "Nombre",

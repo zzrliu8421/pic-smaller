@@ -21,6 +21,13 @@ const localeData: LocaleData = {
     removeOne: "پاک کردن تصویر",
     reCompress: "فشرده‌سازی مجدد",
   },
+  sort: {
+    placeholder: "مرتب‌سازی",
+    default: "ترتیب پیش‌فرض",
+    name: "بر اساس نام",
+    size: "بر اساس حجم",
+    rate: "بر اساس نرخ",
+  },
   columnTitle: {
     status: "وضعیت",
     name: "نام",

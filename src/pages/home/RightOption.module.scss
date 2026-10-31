@@ -1,4 +1,4 @@
-$border: 1px solid rgba(255, 255, 255, 0.08);
+$border: 1px solid rgba(242, 234, 217, 0.09);
 
 .sidePc {
   width: 380px;
@@ -17,30 +17,37 @@ $border: 1px solid rgba(255, 255, 255, 0.08);
   $h1: 60px;
   height: 100%;
   overflow: hidden;
-  background-color: #18181b;
+  background-color: #1e1811;
+  display: flex;
+  flex-direction: column;
   > div:nth-child(1) {
     height: $h1;
     border-bottom: $border;
-    background-color: #1f1f23;
+    background-color: rgba(37, 30, 21, 0.8);
     padding: 0 16px;
+    flex-shrink: 0;
   }
   > div:nth-child(2) {
-    padding: 16px;
+    padding: 18px 16px 28px;
     overflow-y: auto;
     flex: 1;
-    height: calc(100% - $h1);
   }
 }
 
 .optionHelp {
   cursor: pointer;
   font-size: 0;
+  color: #6e6450;
+  transition: color 0.25s ease;
+  &:hover {
+    color: #f5a524;
+  }
   > span {
     font-size: 0;
   }
   svg {
-    width: 18px;
-    height: 18px;
+    width: 17px;
+    height: 17px;
   }
 }
 .optionHelpBox {

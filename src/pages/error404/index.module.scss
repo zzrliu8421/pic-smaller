@@ -1,5 +1,44 @@
 .container {
   height: 100vh;
   width: 100vw;
-  background-color: #0a0a0b;
+  background-color: #15110c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.aperture {
+  width: 84px;
+  height: 84px;
+  stroke: #f5a524;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  opacity: 0.55;
+  animation: Dk404Spin 14s linear infinite;
+}
+
+@keyframes Dk404Spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.title {
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  background: linear-gradient(120deg, #ffbe4d, #e08700);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.desc {
+  color: #a89a83;
+  margin-bottom: 10px;
 }

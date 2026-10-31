@@ -23,6 +23,13 @@ export interface LocaleData {
     removeOne: string;
     reCompress: string;
   };
+  sort: {
+    placeholder: string;
+    default: string;
+    name: string;
+    size: string;
+    rate: string;
+  };
   columnTitle: {
     status: string;
     name: string;

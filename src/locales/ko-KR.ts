@@ -24,6 +24,13 @@ const localeData: LocaleData = {
     removeOne: "사진 제거",
     reCompress: "재압축",
   },
+  sort: {
+    placeholder: "정렬",
+    default: "기본 순서",
+    name: "이름순",
+    size: "크기순",
+    rate: "압축률순",
+  },
   columnTitle: {
     status: "상태",
     name: "파일 이름",

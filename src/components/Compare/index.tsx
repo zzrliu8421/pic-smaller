@@ -255,10 +255,24 @@ export const Compare = observer(() => {
       </div>
       <div style={barStyle}>
         <Flex align="center" justify="center" ref={barRef}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M6.45,17.45L1,12L6.45,6.55L7.86,7.96L4.83,11H19.17L16.14,7.96L17.55,6.55L23,12L17.55,17.45L16.14,16.04L19.17,13H4.83L7.86,16.04L6.45,17.45Z" />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9.2" opacity="0.5" />
+            <g>
+              <line x1="14.31" y1="8" x2="20.05" y2="17.94" />
+              <line x1="9.69" y1="8" x2="21.17" y2="8" />
+              <line x1="7.38" y1="12" x2="13.12" y2="2.06" />
+              <line x1="9.69" y1="16" x2="3.95" y2="6.06" />
+              <line x1="14.31" y1="16" x2="2.83" y2="16" />
+              <line x1="16.62" y1="12" x2="10.88" y2="21.94" />
+            </g>
           </svg>
         </Flex>
+      </div>
+      <div className={classNames(style.frameTag, style.before)}>
+        {gstate.locale?.progress.before}
+      </div>
+      <div className={classNames(style.frameTag, style.after)}>
+        {gstate.locale?.progress.after}
       </div>
       <Space className={style.action}>
         <Popover

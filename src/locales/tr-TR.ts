@@ -21,6 +21,13 @@ const localeData: LocaleData = {
     removeOne: "Sil",
     reCompress: "Yeniden sıkıştır",
   },
+  sort: {
+    placeholder: "Sırala",
+    default: "Varsayılan sıra",
+    name: "İsme göre",
+    size: "Boyuta göre",
+    rate: "Orana göre",
+  },
   columnTitle: {
     status: "Durum",
     name: "İsim",

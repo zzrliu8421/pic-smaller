@@ -6,11 +6,262 @@
 .menu {
   padding: 0 16px;
   height: 60px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: #18181b;
+  border-bottom: 1px solid rgba(242, 234, 217, 0.09);
+  background-color: rgba(30, 24, 17, 0.6);
   flex-shrink: 0;
 }
 
-.nowrap {
+.scrollBox {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* 底部显影状态栏 */
+.footer {
+  flex-shrink: 0;
+  padding: 12px 16px 14px;
+  border-top: 1px solid rgba(242, 234, 217, 0.09);
+  background-color: rgba(30, 24, 17, 0.6);
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px 20px;
+}
+
+/* ============ 胶片帧卡片 ============ */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1e1811;
+  border: 1px solid rgba(242, 234, 217, 0.08);
+  border-radius: 10px;
+  padding: 10px 12px 10px 0;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  &:hover {
+    border-color: rgba(245, 165, 36, 0.45);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(245, 165, 36, 0.05);
+
+    .compareHint {
+      opacity: 1;
+    }
+  }
+
+  /* 压缩变小：左侧琥珀描边 */
+  &.better::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, transparent, #f5a524, transparent);
+    opacity: 0.7;
+  }
+}
+
+/* 胶片齿孔边 */
+.sprockets {
+  width: 12px;
+  align-self: stretch;
+  flex-shrink: 0;
+  margin-left: 8px;
+  background-image: repeating-linear-gradient(
+    180deg,
+    rgba(242, 234, 217, 0.16) 0 5px,
+    transparent 5px 13px
+  );
+  background-size: 6px 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 2px;
+}
+
+/* 缩略图 */
+.thumb {
+  width: 62px;
+  height: 62px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(242, 234, 217, 0.1);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+/* 显影扫描线：压缩中琥珀光带扫过 */
+.scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -100%;
+  height: 60%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(245, 165, 36, 0.35),
+    transparent
+  );
+  animation: DkScan 1.4s ease-in-out infinite;
+}
+
+@keyframes DkScan {
+  0% {
+    top: -70%;
+  }
+  100% {
+    top: 110%;
+  }
+}
+
+.compareHint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(21, 17, 12, 0.72);
+  color: #f5a524;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* 信息区 */
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.name {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
+  color: #f2ead9;
+  max-width: 100%;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #a89a83;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.metaItem {
+  flex-shrink: 0;
+}
+
+.metaArrow {
+  color: #6e6450;
+  flex-shrink: 0;
+}
+
+.metaSize {
+  flex-shrink: 0;
+  &.good {
+    color: #f5a524;
+    font-weight: 600;
+  }
+  &.bad {
+    color: #ef6a5a;
+  }
+}
+
+.metaDivider {
+  width: 1px;
+  height: 12px;
+  background: rgba(242, 234, 217, 0.14);
+  flex-shrink: 0;
+}
+
+/* 压缩率徽章 */
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  cursor: default;
+
+  &.badgeGood {
+    color: #ffbe4d;
+    background: rgba(245, 165, 36, 0.12);
+    border: 1px solid rgba(245, 165, 36, 0.3);
+  }
+  &.badgeBad {
+    color: #f59c90;
+    background: rgba(239, 106, 90, 0.1);
+    border: 1px solid rgba(239, 106, 90, 0.3);
+  }
+}
+
+/* 操作区 */
+.actions {
+  flex-shrink: 0;
+  :global(.ant-btn-text) {
+    color: #a89a83;
+    &:hover {
+      color: #f5a524;
+      background: rgba(245, 165, 36, 0.1);
+    }
+    &:disabled {
+      color: #4a4336;
+    }
+  }
+  .removeBtn:hover {
+    color: #ef6a5a !important;
+    background: rgba(239, 106, 90, 0.1) !important;
+  }
+}
+
+/* 窄屏适配 */
+@media (max-width: 719px) {
+  .cards {
+    padding: 10px 10px 16px;
+    gap: 8px;
+  }
+  .card {
+    gap: 10px;
+    padding: 8px 8px 8px 0;
+  }
+  .sprockets {
+    display: none;
+  }
+  .thumb {
+    width: 52px;
+    height: 52px;
+    margin-left: 8px;
+  }
+  .badge {
+    display: none;
+  }
 }

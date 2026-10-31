@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import style from "./index.module.scss";
-import { Flex, Progress, Typography } from "antd";
+import { Flex, Typography } from "antd";
 import { gstate } from "@/global";
 import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 import { homeState } from "@/states/home";
@@ -14,54 +14,59 @@ export const ProgressHint = observer(() => {
   let rate: React.ReactNode = null;
   if (info.originSize > info.outputSize) {
     rate = (
-      <Typography.Text type="success" strong>
-        {info.rate}%&nbsp;
+      <Typography.Text className={style.rateGood} strong>
+        {info.rate}%
         <ArrowDownOutlined />
       </Typography.Text>
     );
   } else {
     rate = (
-      <Typography.Text type="danger" strong>
-        {info.rate}%&nbsp;
+      <Typography.Text className={style.rateBad} strong>
+        {info.rate}%
         <ArrowUpOutlined />
       </Typography.Text>
     );
   }
 
   return (
-    <Flex align="center">
-      <Progress
-        type="circle"
-        percent={info.percent}
-        // strokeColor={info.percent === 100 ? token.colorPrimary : token.colorInfo}
-        strokeWidth={20}
-        size={14}
-      />
-      <div className={style.progress}>
-        <Typography.Text strong type="success">
-          {info.loadedNum}
-        </Typography.Text>
-        <Typography.Text type="secondary">
-          &nbsp;/&nbsp;{info.totalNum}&nbsp;&nbsp;&nbsp;&nbsp;
-        </Typography.Text>
+    <Flex vertical className={style.container}>
+      <Flex align="center" className={style.stats}>
+        {/* 显影进度计数器 */}
+        <span className={style.counter}>
+          <Typography.Text strong className={style.loaded}>
+            {info.loadedNum}
+          </Typography.Text>
+          <Typography.Text type="secondary">
+            &nbsp;/&nbsp;{info.totalNum}
+          </Typography.Text>
+        </span>
+        <span className={style.dot} />
         {!isMobile && (
           <>
-            <Typography.Text type="secondary">
-              {gstate.locale?.progress.before}：
+            <span className={style.item}>
+              <label>{gstate.locale?.progress.before}</label>
               <Typography.Text>{formatSize(info.originSize)}</Typography.Text>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-            </Typography.Text>
-            <Typography.Text type="secondary">
-              {gstate.locale?.progress.after}：
+            </span>
+            <span className={style.dot} />
+            <span className={style.item}>
+              <label>{gstate.locale?.progress.after}</label>
               <Typography.Text>{formatSize(info.outputSize)}</Typography.Text>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-            </Typography.Text>
+            </span>
+            <span className={style.dot} />
           </>
         )}
-        <Typography.Text type="secondary">
-          {gstate.locale?.progress.rate}：{rate}
-          &nbsp;&nbsp;&nbsp;&nbsp;
-        </Typography.Text>
+        <span className={style.item}>
+          <label>{gstate.locale?.progress.rate}</label>
+          {rate}
+        </span>
+      </Flex>
+      {/* 显影条：琥珀渐变进度 */}
+      <div className={style.track}>
+        <div
+          className={style.fill}
+          style={{ width: `${info.percent}%` }}
+          data-done={info.percent === 100 || undefined}
+        />
       </div>
     </Flex>
   );

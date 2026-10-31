@@ -26,20 +26,20 @@
   bottom: 0;
   z-index: 9;
   user-select: none;
-  background-color: #0a0a0b;
+  background-color: #15110c;
   background-image: linear-gradient(
       45deg,
-      rgba(255, 255, 255, 0.04) 25%,
+      rgba(242, 234, 217, 0.045) 25%,
       transparent 25%,
       transparent 75%,
-      rgba(255, 255, 255, 0.04) 75%
+      rgba(242, 234, 217, 0.045) 75%
     ),
     linear-gradient(
       45deg,
-      rgba(255, 255, 255, 0.04) 25%,
+      rgba(242, 234, 217, 0.045) 25%,
       transparent 25%,
       transparent 75%,
-      rgba(255, 255, 255, 0.04) 75%
+      rgba(242, 234, 217, 0.045) 75%
     );
   background-size: 20px 20px;
   background-position:
@@ -76,28 +76,38 @@
     right: 0;
   }
 
+  /* 琥珀分割线 + 光圈手柄 */
   > div:nth-child(3) {
     position: absolute;
     top: 0;
     bottom: 0;
     z-index: 3;
-    background-color: #10b981;
+    background: linear-gradient(
+      90deg,
+      rgba(245, 165, 36, 0.25),
+      #f5a524 40%,
+      #ffbe4d 60%,
+      rgba(245, 165, 36, 0.25)
+    );
+    box-shadow: 0 0 14px rgba(245, 165, 36, 0.5);
     > div {
       position: absolute;
-      width: 30px;
-      height: 30px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       cursor: grab;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: rgba(16, 185, 129, 0.9);
+      background-color: rgba(21, 17, 12, 0.92);
+      border: 1.5px solid #f5a524;
+      box-shadow: 0 0 16px rgba(245, 165, 36, 0.55);
       svg {
         width: 20px;
         height: 20px;
-        path {
-          fill: #fff;
-        }
+        stroke: #f5a524;
+        stroke-width: 1.8;
+        stroke-linecap: round;
       }
     }
   }
@@ -109,15 +119,28 @@
   right: 16px;
 }
 
-.before {
+/* 胶片边缘标签：压缩前 / 压缩后 */
+.frameTag {
   position: absolute;
-  left: 16px;
-  bottom: 16px;
+  bottom: 18px;
+  z-index: 4;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #a89a83;
+  padding: 6px 14px;
+  background: rgba(21, 17, 12, 0.78);
+  border: 1px solid rgba(242, 234, 217, 0.14);
+  border-radius: 999px;
+  pointer-events: none;
+}
+.before {
+  left: 18px;
 }
 .after {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
+  right: 18px;
+  color: #ffbe4d;
+  border-color: rgba(245, 165, 36, 0.4);
 }
 
 .help {

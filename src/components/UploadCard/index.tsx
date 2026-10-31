@@ -1,4 +1,4 @@
-import { Flex, Typography, theme } from "antd";
+import { Flex, Typography } from "antd";
 import style from "./index.module.scss";
 import { useEffect, useRef } from "react";
 import classNames from "classnames";
@@ -12,7 +12,6 @@ import { sprintf } from "sprintf-js";
 import { Mimes } from "@/mimes";
 
 export const UploadCard = observer(() => {
-  const { token } = theme.useToken();
   const fileRef = useRef<HTMLInputElement>(null);
   const dragRef = useRef<HTMLDivElement>(null);
 
@@ -80,25 +79,43 @@ export const UploadCard = observer(() => {
     };
   }, []);
 
+  const formats = Object.keys(Mimes).map((item) => item.toUpperCase());
+
   return (
     <Flex
       justify="center"
       align="center"
       className={classNames(style.container, state.dragActive && style.active)}
-      style={{ borderRadius: token.borderRadiusLG }}
     >
       <Flex vertical align="center" className={style.inner}>
-        <svg viewBox="0 0 1024 1024">
-          <path d="M128 256l0 640 896 0L1024 256 128 256zM960 789.344 832 576l-145.056 120.896L576 512 192 832 192 320l768 0L960 789.344zM256 480A3 3 7560 1 0 448 480 3 3 7560 1 0 256 480zM896 128 0 128 0 768 64 768 64 192 896 192z" />
+        {/* 快门光圈：拖入时叶片张开 */}
+        <svg className={style.aperture} viewBox="0 0 100 100" fill="none">
+          <circle className={style.ring} cx="50" cy="50" r="46" />
+          <g className={style.blades}>
+            <line x1="59.6" y1="33.4" x2="83.5" y2="74.8" />
+            <line x1="40.4" y1="33.4" x2="88.2" y2="33.4" />
+            <line x1="30.8" y1="50" x2="54.7" y2="8.6" />
+            <line x1="40.4" y1="66.6" x2="16.5" y2="25.2" />
+            <line x1="59.6" y1="66.6" x2="11.8" y2="66.6" />
+            <line x1="69.2" y1="50" x2="45.3" y2="91.4" />
+          </g>
+          <circle className={style.core} cx="50" cy="50" r="10" />
         </svg>
-        <Typography.Text>{gstate.locale?.uploadCard.title}</Typography.Text>
-        <div>
+        <Typography.Text className={style.title}>
+          {gstate.locale?.uploadCard.title}
+        </Typography.Text>
+        <div className={style.subTitle}>
           {sprintf(
             gstate.locale?.uploadCard.subTitle ?? "",
-            Object.keys(Mimes)
-              .map((item) => item.toUpperCase())
-              .join("/"),
+            formats.join(" / "),
           )}
+        </div>
+        <div className={style.chips}>
+          {formats.map((item) => (
+            <span key={item} className={style.chip}>
+              {item}
+            </span>
+          ))}
         </div>
         <div className={style.pasteHint}>
           {gstate.locale?.uploadCard.pasteHint}

@@ -23,6 +23,13 @@ const localeData: LocaleData = {
     removeOne: "画像を削除",
     reCompress: "再圧縮",
   },
+  sort: {
+    placeholder: "並べ替え",
+    default: "デフォルト順",
+    name: "名前順",
+    size: "サイズ順",
+    rate: "圧縮率順",
+  },
   columnTitle: {
     status: "ステータス",
     name: "ファイル名",
